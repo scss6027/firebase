@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page.title }}</title>
+    <style>
+        /* RETRO TERMINAL CSS */
+        body {
+            background-color: #050a05;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0; padding: 20px;
+            overflow: hidden;
+            text-shadow: 0 0 5px #00ff41;
+        }
+
+        /* CRT SCANLINE EFFECT */
+        body::before {
+            content: " ";
+            position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 10;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        #output {
+            height: 90vh;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-bottom: 10px;
+        }
+
+        .prompt-line { display: flex; align-items: center; }
+        .prompt { margin-right: 10px; font-weight: bold; }
+        input {
+            background: transparent; border: none; color: #00ff41;
+            font-family: inherit; font-size: inherit; outline: none; flex: 1;
+            text-shadow: 0 0 5px #00ff41;
+        }
+
+        /* FLICKER ANIMATION */
+        @keyframes flicker {
+            0% { opacity: 0.97; } 5% { opacity: 0.95; } 10% { opacity: 0.9; }
+            100% { opacity: 1; }
+        }
+        #output { animation: flicker 0.1s infinite; }
+    </style>
+</head>
+<body>
+
+    <div id="output">{{ page.boot_message }}
+{{ content }}</div>
+
+    <div class="prompt-line">
+        <span class="prompt">SCSS6027_ROOT ></span>
+        <input type="text" id="command-input" autofocus>
+    </div>
+
+    <script>
+        const input = document.getElementById('command-input');
+        const output = document.getElementById('output');
+
+        // This pulls the data Jekyll has stored in _data/tickets.json
+        const tickets = {{ site.data.tickets | jsonify }};
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = input.value.trim().toLowerCase();
+                handleCommand(cmd);
+                input.value = '';
+            }
+        });
+
+        function handleCommand(cmd) {
+            printLine(`\n> ${cmd}`);
+
+            if (cmd === 'help') {
+                printLine("AVAILABLE COMMANDS: \n- LS: List all tickets\n- CLEAR: Clear terminal\n- EXIT: Log out");
+            } else if (cmd === 'ls') {
+                if (tickets.length === 0) {
+                    printLine("DATABASE EMPTY.");
+                } else {
+                    printLine("TICKET_ID | STATUS | NAME | DESCRIPTION");
+                    printLine("--------------------------------------");
+                    tickets.forEach(t => {
+                        printLine(`#${t.TicketNumber} | ${t.Status} | ${t.Name} | ${t.Description.substring(0, 20)}...`);
+                    });
+                }
+            } else if (cmd === 'clear') {
+                output.innerHTML = 'SYSTEM CLEARED.';
+            } else {
+                printLine("ERROR: COMMAND NOT RECOGNIZED.");
+            }
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function printLine(text) {
+            output.innerHTML += `\n${text}`;
+        }
+    </script>
+</body>
+</html>
