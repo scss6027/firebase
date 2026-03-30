@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Access Control - FIREBASE</title>
+
+  <style>
+    body { 
+      background-color: #f8d7da; 
+      color: #721c24; 
+      font-family: 'Segoe UI', Tahoma, sans-serif; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh; 
+      margin: 0; 
+      text-align: center;
+    }
+    .gate-card { 
+      background: white; 
+      padding: 50px; 
+      border-radius: 12px; 
+      border: 2px solid #721c24; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+      display: none; /* Hidden by default */
+    }
+    h1 { font-size: 3rem; margin: 0; }
+    p { font-size: 1.2rem; font-weight: bold; }
+    .btn-return { 
+      display: inline-block; 
+      margin-top: 25px; 
+      padding: 12px 25px; 
+      background: #721c24; 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 5px; 
+    }
+  </style>
+
+  <script>
+    /**
+     * FIREBASE CONSOLE SECURITY GATE
+     * Hard-coded Admin Validation
+     */
+    (function() {
+      const ADMIN_ID = "swd.website786@gmail.com";
+      const sessionEmail = sessionStorage.getItem("consoleAuth") || sessionStorage.getItem("scss_admin_session");
+
+      // Check if current session matches the one true Admin ID
+      if (sessionEmail && sessionEmail.toLowerCase() === ADMIN_ID.toLowerCase()) {
+          // AUTH_SUCCESS: Proceed to Management Console
+          window.location.href = "console-main.html";
+      } else {
+          // AUTH_FAILURE: The page will remain on index.html and show the "Unauthorized" UI
+          window.onload = function() {
+              document.getElementById('unauthorized-screen').style.display = 'block';
+          };
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- UNAUTHORIZED SCREEN (Only visible if ID check fails) -->
+  <div id="unauthorized-screen" class="gate-card">
+    <h1>403</h1>
+    <h2>UNAUTHORIZED ACCESS</h2>
+    <hr>
+    <p>CRITICAL ERROR: Access to the FIREBASE management console is restricted to the Primary Administrator.</p>
+    <p>Your identity has been logged and access is denied.</p>
+    <a href="login.html" class="btn-return">Return to Login Terminal</a>
+  </div>
+
+</body>
+</html>
