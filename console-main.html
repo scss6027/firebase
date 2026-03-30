@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">json`** source of truth.
+
+### The FULL `console-main.html` (Daylight Version)
+
+```html
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCSS6027 Daylight Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daylight Console - SCSS6027</title>
+
+  <!-- Universal public stylesheet from MAIN -->
+  <link rel="stylesheet" href="https://scss6027.github.io/main/style-public.css">
+  
+  <style>
+    body { background-color: #f4
+
+  <!-- Universal public stylesheet from MAIN -->
+  <link rel="stylesheet" href="https://scss6027.github.io/main/style-public.css">
+
+  <script>
+    // SECURITY: Ensure active admin session
+    if (!sessionStorage.getItem("consoleAuth")) {
+      window.location.href = "login.html";
+    }f7f6; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .console-container { max-width: 1000px; margin: 40px auto; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0
+  </script>
+
+  <style>
+    :root {
+      --primary-bg: #f4f7f6;
+      --card-bg: #ffffff;
+      --accent-blue: #2.1); }
+    header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2b00fe; padding-bottom: 15px; margin-bottom:b00fe;
+      --text-dark: #333;
+      --border-color: #ddd;
+    }
+
+    body { background-color: var(--primary-bg); color: var(--text-dark); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    
+    header.console-header { background: var(--accent-blue); color: white; padding 20px; }
+    .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-logout { background-color: #d9534f; color: white; }
+    .btn-update { background-color: #2b00fe; color: white; }
+    
+    table { width: 10: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box0%; border-collapse: collapse; margin-top: 20px; }
+    th { text-align: left; background-color: #e9ecef; padding: 12px; border-bottom: 2px solid #dee-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    
+    2e6; }
+    td { padding: 12px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+    tr:hover { background-color: #f1f3main { max-width: 1200px; margin: 20px auto; padding: f5; }
+
+    .edit-panel { display: none; background: #fffbe6; padding: 20px; border: 1px solid #ffe58f; border-radius: 8px; margin-bottom: 20px; }
+    .form-group { margin-bottom: 1520px; }
+    
+    .status-bar { background: #e9ecef; padding: 10px 20px; border-radius: 5px; margin-bottom: 20px; display: flex; gap: 20px; font-size: 0.9rem; }
+    
+    .data-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px;px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; }
+    input, textarea, select { width: 100%; padding: 10px; border: padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0, 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    
+    #statusMsg { margin: 15px 0; padding: 10px; border-radius: 4px; display: none; }
+  </style>
+
+  <script>
+    // 1. SECURITY:0.05); }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th { text-align: left; background: #f8f9fa; border-bottom: 2px solid var(--border-color); padding: 12px; }
+ Check session immediately
+    const userEmail = sessionStorage.getItem("consoleAuth") || sessionStorage.getItem("scss_admin_session");
+    if (!userEmail) { window.location.href = "login.html"; }
+
+    // 2. DATA INJECTION: Source of Truth
+    let tickets = {{ site.data.tickets | jsonify }};
+    const GITHUB_API_URL = "https://api.github.com/repos/SCSS60    td { padding: 12px; border-bottom: 1px solid var(--border-color); }
+    tr:hover { background: #f1f1f1; }
+
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+    .btn-edit { background: var(--accent-blue); color: white; }
+    .btn-save { background: #28a74527/FIREBASE/contents/_data/tickets.json";
+  </script>
+</head>
+<body>
+
+<div class="console-container">
+  <header>
+    <h1>TICKET_MANAGEMENT_CONSOLE; color: white; }
+    
+    #edit-panel { display: none; margin-top: 20px; padding: 20px; border: 2px solid var(--accent-blue); border-radius: 8px; background: #fff; }
+    input, textarea, select { width: 100%;</h1>
+    <div>
+      <span id="user-display" style="margin-right: 15px; font-weight: bold;"></span>
+      <button class="btn btn-logout" onclick="logoutUser()">Logout</button>
+    </div>
+  </header>
+
+  <div id="statusMsg"></div>
+
+  <!-- EDITING PANEL -->
+  <div padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    
+    #msg { margin-top: 15px; font-weight: bold; padding: 10px; border-radius: 4px; display: none; id="editPanel" class="edit-panel">
+    <h3>Modify Ticket #<span id="edit-id-display"></span></h3>
+    <div class="form-group">
+      <label>Status:</label>
+      <select id="edit-status">
+        <option value="Open">Open</option>
+        <option value="Pending">Pending</option>
+        <option value="Closed">Closed</option>
+      </select>
+ }
+  </style>
+</head>
+<body>
+
+  <header class="console-header">
+    <strong>SCSS6027 // FIREBASE MANAGEMENT</strong>
+    <div>
+      <span id="admin-email"></span>
+          </div>
+    <div class="form-group">
+      <label>Description:</label>
+      <textarea id="edit-description" rows="4"></textarea>
+    </div>
+    <button class="btn btn-update" onclick="<button onclick="sessionStorage.clear(); window.location.href='login.html';" style="margin-left:15px; background:white; color:red; border:none; padding:5px 10px; cursor:pointer; font-weight:bold;">LOGOUT</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="status-bar">
+      <span>Database: <strong>_data/tickets.json</strong></span>
+      <span>Records: <strong id="count">0</strong></span>
+      <span>PAT: <strong id="pat-statuscommitChanges()">Commit Update to GitHub</button>
+    <button class="btn" onclick="closeEdit()">Cancel</button>
+  </div>
+
+  <!-- TICKET TABLE -->
+  <div id="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="ticket-body">
+        <!-- Loaded via JavaScript -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  let currentEditIndex = -1;
+
+  document.addEventListener('DOMContentLoaded', () => {" style="color:red;">NOT LOADED</strong></span>
+    </div>
+
+    <div class="data-card">
+      <h2>Active Tickets Registry</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id
+    document.getElementById('user-display').textContent = userEmail;
+    renderTable();
+  });
+
+  function renderTable() {
+    const tbody = document.getElementById('ticket-body');
+    tbody.innerHTML = '';
+    
+    tickets.forEach((t, index) => {
+      const row = `<tr>
+        <td>${t.="ticket-table-body">
+          <!-- Data injected here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Edit Panel -->
+    <div id="edit-panel">
+      <h3>Modify Ticket #<span id="edit-id"></span>TicketNumber}</td>
+        <td>${t.Name}</td>
+        <td>${t.Description.substring(0, 50)}...</td>
+        <td><span style="font-weight:bold; color:${t.Status === 'Open</h3>
+      <input type="text" id="edit-subject" placeholder="Subject">
+      <textarea id' ? 'green' : 'orange'}">${t.Status}</span></td>
+        <td><button class="btn" onclick="edit-desc" rows="4" placeholder="Description"></textarea>
+      <select id="edit-status">
+        <option value="Open">Open</option>
+        <option value="Pending">Pending</option="openEdit(${index})">View/Edit</button></td>
+      </tr>`;
+      tbody.innerHTML += row;
+>
+        <option value="Closed">Closed</option>
+      </select>
+      <button class="    });
+  }
+
+  function openEdit(index) {
+    currentEditIndex = index;
+    const t = tickets[index];
+    document.getElementById('edit-id-display').textContent = t.TicketNumber;btn btn-save" onclick="saveChanges()">COMMIT CHANGES TO GITHUB</button>
+      <button class="
+    document.getElementById('edit-status').value = t.Status;
+    document.getElementById('edit-description').value = t.Description;
+    document.getElementById('editPanel').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  function closeEdit() {
+    document.getElementById('editPanel').style.display = 'none';
+    currentEditIndex = -1;
+  }
+
+  async function commitChanges() {btn" onclick="document.getElementById('edit-panel').style.display='none'">CANCEL</button>
+      <div id="msg"></div>
+    </div>
+  </main>
+
+  <script>
+    // 1. DATA INJECTION FROM JEKYLL
+    const tickets = {{ site.data.tickets | jsonify }};
+    const userEmail =
+    const statusBox = document.getElementById('statusMsg');
+    const pat = localStorage.getItem('GITHUB_PAT') || sessionStorage.getItem('temp_pat');
+
+    if (!pat) {
+      alert("ERROR: GITHUB_PAT sessionStorage.getItem("consoleAuth");
+    const GITHUB_API_URL = "https://api.github.com/repos/SCSS6027/FIREBASE/contents/_data/tickets.json";
+
+    document.getElementById('admin-email').textContent = userEmail;
+    document.getElementById('count').textContent = tickets.length;
+
+    // Check for PAT in session (assigned via Terminal or Login)
+    const pat = sessionStorage.getItem(' not found. Please provide your token.");
+      return;
+    }
+
+    statusBox.style.display = 'block';
+    statusBox.style.backgroundColor = '#fff3cd';
+    statusBox.textContent = "Connecting to GitHub API...";
+
+    try {
+      // A. Get latest file SHA
+      const getRes = await fetch(GITHUB_API_URL, { headers: { "Authorization": `token ${pat}` } });
+      temp_pat') || localStorage.getItem('gh_pat_scss');
+    if (pat) {
+      document.getElementById('pat-status').textContent = "READY";
+      document.getElementById('pat-status').style.color = "green";
+    }
+
+    // 2. RENDER TABLE
+    const tableBody = document.getElementById('ticket-table-body');
+    function renderTable() {
+      tableBody.innerHTML = '';
+      tickets.forEach((t, index) => {
+        const row = `<tr>
+          <td>${t.TicketNumber}</td>
+          <td>${t.Name}</td>
+          <td>${t.Description.substring(0, 50)}${t.Description.length > 50 ? '...' : ''}</td>
+          <td><strong>${t.Status}</strong></td>
+          <td><button class="btn btn-const fileData = await getRes.json();
+      const sha = fileData.sha;
+
+      // B. Update local array
+      tickets[currentEditIndex].Status = document.getElementById('edit-status').value;
+      tickets[currentEditIndex].Description = document.getElementById('edit-description').value;
+      tickets[currentEditIndex].Updated = new Date().toISOString();
+
+      // C. Encode and Push
+      const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(tickets, null, 2))));
+      
+      const putRes = await fetch(GITHUB_API_URL, {
+        method: "PUT",
+        headers: { "Authorization": `token ${pat}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `Update Ticket #${tickets[currentEditIndex].TicketNumber} via Daylight Console`,
+          content:edit" onclick="openEdit(${index})">MODIFY</button></td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    }
+    renderTable();
+
+    // 3. EDIT LOGIC
+    let activeIndex = null;
+    function openEdit(index) {
+      activeIndex = index;
+      const t = tickets[index];
+      document.getElementById('edit-id').textContent = t.TicketNumber;
+      document.getElementById('edit-subject').value = t.Subject || "";
+      document.getElementById('edit-desc').value = t.Description;
+      document.getElementById('edit-status').value = t.Status;
+      document.getElementById('edit-panel').style.display = 'block';
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // updatedContent,
+          sha: sha
+        })
+      });
+
+      if (putRes.ok) {
+        statusBox.style.backgroundColor = '#d4edda';
+        statusBox.textContent = "SUCCESS: Database updated. Changes will appear on next build.";
+        setTimeout(() => { closeEdit(); renderTable(); statusBox.style.display='none'; }, 2000);
+      } else {
+        throw new Error("Update failed.");
+      }
+    } catch (err) {
+      statusBox.style.backgroundColor = '#f8d7da';
+      statusBox.textContent = "FAILURE: " + err.message;
+    }
+  }
+
+  function logoutUser() {
+    sessionStorage.clear();
+    window.location.href = "login.html";
+  }
+</script>
+
+ 4. LIVE COMMIT TO GITHUB
+    async function saveChanges() {
+      const messageDiv = document.getElementById('msg');
+      if (!pat) {
+        alert("CRITICAL ERROR: No GitHub PAT found. Please lock your token in the terminal or login page.");
+        return;
+      }
+
+      messageDiv.style.display = 'block';
+      messageDiv.style.background = '#fff3cd';
+      messageDiv.textContent = "Connecting to GitHub Registry...";
+
+      try {
+        // A. Get current SHA
+        const res = await fetch(GITHUB_API_URL, { headers: { "Authorization": `token ${pat}` } });
+        const fileData = await res.</body>
+</html>---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">json`** source of truth.
+
+### The FULL `console-main.html` (Daylight Version)
+
+```html
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCSS6027 Daylight Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daylight Console - SCSS6027</title>
+
+  <!-- Universal public stylesheet from MAIN -->
+  <link rel="stylesheet" href="https://scss6027.github.io/main/style-public.css">
+  
+  <style>
+    body { background-color: #f4
+
+  <!-- Universal public stylesheet from MAIN -->
+  <link rel="stylesheet" href="https://scss6027.github.io/main/style-public.css">
+
+  <script>
+    // SECURITY: Ensure active admin session
+    if (!sessionStorage.getItem("consoleAuth")) {
+      window.location.href = "login.html";
+    }f7f6; color: #333; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .console-container { max-width: 1000px; margin: 40px auto; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0
+  </script>
+
+  <style>
+    :root {
+      --primary-bg: #f4f7f6;
+      --card-bg: #ffffff;
+      --accent-blue: #2.1); }
+    header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #2b00fe; padding-bottom: 15px; margin-bottom:b00fe;
+      --text-dark: #333;
+      --border-color: #ddd;
+    }
+
+    body { background-color: var(--primary-bg); color: var(--text-dark); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    
+    header.console-header { background: var(--accent-blue); color: white; padding 20px; }
+    .btn { padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-logout { background-color: #d9534f; color: white; }
+    .btn-update { background-color: #2b00fe; color: white; }
+    
+    table { width: 10: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box0%; border-collapse: collapse; margin-top: 20px; }
+    th { text-align: left; background-color: #e9ecef; padding: 12px; border-bottom: 2px solid #dee-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    
+    2e6; }
+    td { padding: 12px; border-bottom: 1px solid #dee2e6; vertical-align: top; }
+    tr:hover { background-color: #f1f3main { max-width: 1200px; margin: 20px auto; padding: f5; }
+
+    .edit-panel { display: none; background: #fffbe6; padding: 20px; border: 1px solid #ffe58f; border-radius: 8px; margin-bottom: 20px; }
+    .form-group { margin-bottom: 1520px; }
+    
+    .status-bar { background: #e9ecef; padding: 10px 20px; border-radius: 5px; margin-bottom: 20px; display: flex; gap: 20px; font-size: 0.9rem; }
+    
+    .data-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px;px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; }
+    input, textarea, select { width: 100%; padding: 10px; border: padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0, 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    
+    #statusMsg { margin: 15px 0; padding: 10px; border-radius: 4px; display: none; }
+  </style>
+
+  <script>
+    // 1. SECURITY:0.05); }
+    
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th { text-align: left; background: #f8f9fa; border-bottom: 2px solid var(--border-color); padding: 12px; }
+ Check session immediately
+    const userEmail = sessionStorage.getItem("consoleAuth") || sessionStorage.getItem("scss_admin_session");
+    if (!userEmail) { window.location.href = "login.html"; }
+
+    // 2. DATA INJECTION: Source of Truth
+    let tickets = {{ site.data.tickets | jsonify }};
+    const GITHUB_API_URL = "https://api.github.com/repos/SCSS60    td { padding: 12px; border-bottom: 1px solid var(--border-color); }
+    tr:hover { background: #f1f1f1; }
+
+    .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+    .btn-edit { background: var(--accent-blue); color: white; }
+    .btn-save { background: #28a74527/FIREBASE/contents/_data/tickets.json";
+  </script>
+</head>
+<body>
+
+<div class="console-container">
+  <header>
+    <h1>TICKET_MANAGEMENT_CONSOLE; color: white; }
+    
+    #edit-panel { display: none; margin-top: 20px; padding: 20px; border: 2px solid var(--accent-blue); border-radius: 8px; background: #fff; }
+    input, textarea, select { width: 100%;</h1>
+    <div>
+      <span id="user-display" style="margin-right: 15px; font-weight: bold;"></span>
+      <button class="btn btn-logout" onclick="logoutUser()">Logout</button>
+    </div>
+  </header>
+
+  <div id="statusMsg"></div>
+
+  <!-- EDITING PANEL -->
+  <div padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    
+    #msg { margin-top: 15px; font-weight: bold; padding: 10px; border-radius: 4px; display: none; id="editPanel" class="edit-panel">
+    <h3>Modify Ticket #<span id="edit-id-display"></span></h3>
+    <div class="form-group">
+      <label>Status:</label>
+      <select id="edit-status">
+        <option value="Open">Open</option>
+        <option value="Pending">Pending</option>
+        <option value="Closed">Closed</option>
+      </select>
+ }
+  </style>
+</head>
+<body>
+
+  <header class="console-header">
+    <strong>SCSS6027 // FIREBASE MANAGEMENT</strong>
+    <div>
+      <span id="admin-email"></span>
+          </div>
+    <div class="form-group">
+      <label>Description:</label>
+      <textarea id="edit-description" rows="4"></textarea>
+    </div>
+    <button class="btn btn-update" onclick="<button onclick="sessionStorage.clear(); window.location.href='login.html';" style="margin-left:15px; background:white; color:red; border:none; padding:5px 10px; cursor:pointer; font-weight:bold;">LOGOUT</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="status-bar">
+      <span>Database: <strong>_data/tickets.json</strong></span>
+      <span>Records: <strong id="count">0</strong></span>
+      <span>PAT: <strong id="pat-statuscommitChanges()">Commit Update to GitHub</button>
+    <button class="btn" onclick="closeEdit()">Cancel</button>
+  </div>
+
+  <!-- TICKET TABLE -->
+  <div id="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="ticket-body">
+        <!-- Loaded via JavaScript -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  let currentEditIndex = -1;
+
+  document.addEventListener('DOMContentLoaded', () => {" style="color:red;">NOT LOADED</strong></span>
+    </div>
+
+    <div class="data-card">
+      <h2>Active Tickets Registry</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id
+    document.getElementById('user-display').textContent = userEmail;
+    renderTable();
+  });
+
+  function renderTable() {
+    const tbody = document.getElementById('ticket-body');
+    tbody.innerHTML = '';
+    
+    tickets.forEach((t, index) => {
+      const row = `<tr>
+        <td>${t.="ticket-table-body">
+          <!-- Data injected here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Edit Panel -->
+    <div id="edit-panel">
+      <h3>Modify Ticket #<span id="edit-id"></span>TicketNumber}</td>
+        <td>${t.Name}</td>
+        <td>${t.Description.substring(0, 50)}...</td>
+        <td><span style="font-weight:bold; color:${t.Status === 'Open</h3>
+      <input type="text" id="edit-subject" placeholder="Subject">
+      <textarea id' ? 'green' : 'orange'}">${t.Status}</span></td>
+        <td><button class="btn" onclick="edit-desc" rows="4" placeholder="Description"></textarea>
+      <select id="edit-status">
+        <option value="Open">Open</option>
+        <option value="Pending">Pending</option="openEdit(${index})">View/Edit</button></td>
+      </tr>`;
+      tbody.innerHTML += row;
+>
+        <option value="Closed">Closed</option>
+      </select>
+      <button class="    });
+  }
+
+  function openEdit(index) {
+    currentEditIndex = index;
+    const t = tickets[index];
+    document.getElementById('edit-id-display').textContent = t.TicketNumber;btn btn-save" onclick="saveChanges()">COMMIT CHANGES TO GITHUB</button>
+      <button class="
+    document.getElementById('edit-status').value = t.Status;
+    document.getElementById('edit-description').value = t.Description;
+    document.getElementById('editPanel').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  function closeEdit() {
+    document.getElementById('editPanel').style.display = 'none';
+    currentEditIndex = -1;
+  }
+
+  async function commitChanges() {btn" onclick="document.getElementById('edit-panel').style.display='none'">CANCEL</button>
+      <div id="msg"></div>
+    </div>
+  </main>
+
+  <script>
+    // 1. DATA INJECTION FROM JEKYLL
+    const tickets = {{ site.data.tickets | jsonify }};
+    const userEmail =
+    const statusBox = document.getElementById('statusMsg');
+    const pat = localStorage.getItem('GITHUB_PAT') || sessionStorage.getItem('temp_pat');
+
+    if (!pat) {
+      alert("ERROR: GITHUB_PAT sessionStorage.getItem("consoleAuth");
+    const GITHUB_API_URL = "https://api.github.com/repos/SCSS6027/FIREBASE/contents/_data/tickets.json";
+
+    document.getElementById('admin-email').textContent = userEmail;
+    document.getElementById('count').textContent = tickets.length;
+
+    // Check for PAT in session (assigned via Terminal or Login)
+    const pat = sessionStorage.getItem(' not found. Please provide your token.");
+      return;
+    }
+
+    statusBox.style.display = 'block';
+    statusBox.style.backgroundColor = '#fff3cd';
+    statusBox.textContent = "Connecting to GitHub API...";
+
+    try {
+      // A. Get latest file SHA
+      const getRes = await fetch(GITHUB_API_URL, { headers: { "Authorization": `token ${pat}` } });
+      temp_pat') || localStorage.getItem('gh_pat_scss');
+    if (pat) {
+      document.getElementById('pat-status').textContent = "READY";
+      document.getElementById('pat-status').style.color = "green";
+    }
+
+    // 2. RENDER TABLE
+    const tableBody = document.getElementById('ticket-table-body');
+    function renderTable() {
+      tableBody.innerHTML = '';
+      tickets.forEach((t, index) => {
+        const row = `<tr>
+          <td>${t.TicketNumber}</td>
+          <td>${t.Name}</td>
+          <td>${t.Description.substring(0, 50)}${t.Description.length > 50 ? '...' : ''}</td>
+          <td><strong>${t.Status}</strong></td>
+          <td><button class="btn btn-const fileData = await getRes.json();
+      const sha = fileData.sha;
+
+      // B. Update local array
+      tickets[currentEditIndex].Status = document.getElementById('edit-status').value;
+      tickets[currentEditIndex].Description = document.getElementById('edit-description').value;
+      tickets[currentEditIndex].Updated = new Date().toISOString();
+
+      // C. Encode and Push
+      const updatedContent = btoa(unescape(encodeURIComponent(JSON.stringify(tickets, null, 2))));
+      
+      const putRes = await fetch(GITHUB_API_URL, {
+        method: "PUT",
+        headers: { "Authorization": `token ${pat}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `Update Ticket #${tickets[currentEditIndex].TicketNumber} via Daylight Console`,
+          content:edit" onclick="openEdit(${index})">MODIFY</button></td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    }
+    renderTable();
+
+    // 3. EDIT LOGIC
+    let activeIndex = null;
+    function openEdit(index) {
+      activeIndex = index;
+      const t = tickets[index];
+      document.getElementById('edit-id').textContent = t.TicketNumber;
+      document.getElementById('edit-subject').value = t.Subject || "";
+      document.getElementById('edit-desc').value = t.Description;
+      document.getElementById('edit-status').value = t.Status;
+      document.getElementById('edit-panel').style.display = 'block';
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // updatedContent,
+          sha: sha
+        })
+      });
+
+      if (putRes.ok) {
+        statusBox.style.backgroundColor = '#d4edda';
+        statusBox.textContent = "SUCCESS: Database updated. Changes will appear on next build.";
+        setTimeout(() => { closeEdit(); renderTable(); statusBox.style.display='none'; }, 2000);
+      } else {
+        throw new Error("Update failed.");
+      }
+    } catch (err) {
+      statusBox.style.backgroundColor = '#f8d7da';
+      statusBox.textContent = "FAILURE: " + err.message;
+    }
+  }
+
+  function logoutUser() {
+    sessionStorage.clear();
+    window.location.href = "login.html";
+  }
+</script>
+
+ 4. LIVE COMMIT TO GITHUB
+    async function saveChanges() {
+      const messageDiv = document.getElementById('msg');
+      if (!pat) {
+        alert("CRITICAL ERROR: No GitHub PAT found. Please lock your token in the terminal or login page.");
+        return;
+      }
+
+      messageDiv.style.display = 'block';
+      messageDiv.style.background = '#fff3cd';
+      messageDiv.textContent = "Connecting to GitHub Registry...";
+
+      try {
+        // A. Get current SHA
+        const res = await fetch(GITHUB_API_URL, { headers: { "Authorization": `token ${pat}` } });
+        const fileData = await res.</body>
+</html>
