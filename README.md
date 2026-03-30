@@ -1,3 +1,6 @@
+---
+layout: null
+---
 # 📟 SCSS6027_FIREBASE_SYSTEM
 
 ### [ SYSTEM_ID: TICKET_MANAGEMENT_CONSOLE ]
